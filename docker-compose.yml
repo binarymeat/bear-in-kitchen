@@ -17,9 +17,10 @@ services:
           - config-service
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      build: config
-      ports:
-        - 8888:8888
+    build: config-service
+    ports:
+      - 8888:8888
+    image: config-service
     restart: always
     logging:
       options:
@@ -30,6 +31,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     build: registry-service
+    image: registry-service
     restart: always
     ports:
       - 8761:8761
@@ -42,6 +44,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     build: gateway-service
+    image: gateway-service
     restart: always
     ports:
       - 80:4000
@@ -62,6 +65,7 @@ services:
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     build: auth-service
+    image: auth-service
     restart: always
     ports:
       - 5000:5000
@@ -74,6 +78,7 @@ services:
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     build: mongodb
+    image: mongodb
     restart: always
     ports:
       - 25000:27017
@@ -87,6 +92,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
+    image: account-service
     build: account-service
     restart: always
     ports:
@@ -101,6 +107,7 @@ services:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     build: mongodb
+    image: mongodb
     ports:
       - 26000:27017
     restart: always

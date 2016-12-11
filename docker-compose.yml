@@ -28,6 +28,10 @@ services:
         max-file: "10"
 
   registry-service:
+    networks:
+      default:
+        aliases:
+          - registry-service
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     build: registry-service
@@ -64,6 +68,7 @@ services:
       STATISTICS_SERVICE_PASSWORD: $STATISTICS_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
+      MONGODB_USER: $MONGODB_USER
     build: auth-service
     image: auth-service
     restart: always
@@ -77,6 +82,7 @@ services:
   auth-mongodb:
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
+      MONGODB_USER: $MONGODB_USER
     build: mongodb
     image: mongodb
     restart: always
@@ -92,6 +98,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
+      MONGODB_USER: $MONGODB_USER
     image: account-service
     build: account-service
     restart: always
@@ -106,6 +113,7 @@ services:
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: $MONGODB_PASSWORD
+      MONGODB_USER: $MONGODB_USER
     build: mongodb
     image: mongodb
     ports:

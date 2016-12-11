@@ -11,7 +11,7 @@ spring:
   data:
     mongodb:
       host: account-mongodb
-      username: user
+      username: ${MONGODB_USER}
       password: ${MONGODB_PASSWORD}
       database: bearinkitchen
       port: 27017

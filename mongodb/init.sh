@@ -13,9 +13,9 @@ auth="-u $MONGODB_USER -p $MONGODB_PASSWORD"
 
 # MONGODB USER CREATION
 (
-echo "setup mongodb auth"
-create_user="if (!db.getUser('user')) { db.createUser({ user: '$MONGODB_USER', pwd: '$MONGODB_PASSWORD', roles: [ {role:'readWrite', db:'piggymetrics'} ]}) }"
-until mongo piggymetrics --eval "$create_user" || mongo piggymetrics $auth --eval "$create_user"; do sleep 5; done
+echo "setup mongodb"
+create_user="if (!db.getUser('user')) { db.createUser({ user: '$MONGODB_USER', pwd: '$MONGODB_PASSWORD', roles: [ {role:'readWrite', db:'$MONGODB_NAME'} ]}) }"
+until mongo $MONGODB_NAME --eval "$create_user" || mongo $MONGODB_NAME $auth --eval "$create_user"; do sleep 5; done
 killall mongod
 sleep 1
 killall -9 mongod
@@ -25,7 +25,7 @@ killall -9 mongod
 (
 if test -n "$INIT_DUMP"; then
     echo "execute dump file"
-	until mongo piggymetrics $auth $INIT_DUMP; do sleep 5; done
+	until mongo $MONGODB_NAME $auth $INIT_DUMP; do sleep 5; done
 fi
 ) &
 

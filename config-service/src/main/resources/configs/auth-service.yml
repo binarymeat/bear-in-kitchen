@@ -4,7 +4,7 @@ spring:
       host: auth-mongodb
       username: ${MONGODB_USER}
       password: ${MONGODB_PASSWORD}
-      database: bearinkitchen
+      database: ${MONGODB_NAME}
       port: 27017
 
 server:

@@ -6,6 +6,7 @@ import com.binarymeat.accountservice.domain.Account;
 import com.binarymeat.accountservice.domain.User;
 import com.binarymeat.accountservice.repository.AccountRepository;
 import com.binarymeat.accountservice.service.AccountService;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rob on 12/5/16.
@@ -76,5 +78,10 @@ public class AccountServiceImpl implements AccountService {
         log.debug("account {} changes has been saved", name);
 
         statisticsClient.updateStatistics(name, account);
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return Lists.newArrayList(repository.findAll());
     }
 }

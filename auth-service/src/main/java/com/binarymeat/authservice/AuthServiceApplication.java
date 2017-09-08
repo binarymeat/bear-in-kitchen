@@ -11,11 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -45,7 +47,8 @@ public class AuthServiceApplication {
     protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
-        private CustomUserDetailsService userDetailsService;
+        @Qualifier("customUserDetailsService")
+        private UserDetailsService userDetailsService;
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -60,10 +63,18 @@ public class AuthServiceApplication {
             // @formatter:on
         }
 
+        @Bean
+        public DaoAuthenticationProvider authenticationProvider() {
+            DaoAuthenticationProvider authProvider
+                    = new DaoAuthenticationProvider();
+            authProvider.setUserDetailsService(userDetailsService);
+            authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+            return authProvider;
+        }
+
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(userDetailsService)
-                    .passwordEncoder(new BCryptPasswordEncoder());
+            auth.authenticationProvider(authenticationProvider());
         }
 
         @Override
@@ -82,7 +93,8 @@ public class AuthServiceApplication {
         private AuthenticationManager authenticationManager;
 
         @Autowired
-        private CustomUserDetailsService userDetailsService;
+        @Qualifier("customUserDetailsService")
+        private UserDetailsService userDetailsService;
 
         @Autowired
         private Environment env;
@@ -133,7 +145,8 @@ public class AuthServiceApplication {
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             endpoints
-                    .tokenStore(tokenStore()).tokenEnhancer(jwtTokenEnhancer())
+                    .tokenStore(tokenStore())
+                    .tokenEnhancer(jwtTokenEnhancer())
                     .authenticationManager(authenticationManager)
                     .userDetailsService(userDetailsService);
         }

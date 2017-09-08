@@ -1,14 +1,18 @@
 version: '2'
 services:
-#  rabbitmq:
-#    image: rabbitmq:3-management
-#    restart: always
-#    ports:
-#      - 15672:15672
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+  rabbitmq:
+    networks:
+        default:
+          aliases:
+            - rabbitmq
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - 15672:15672
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   config-service:
     networks:
@@ -50,20 +54,20 @@ services:
         max-size: "10m"
         max-file: "10"
 
-#  gateway-service:
-#    environment:
-#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-#    depends_on:
-#          - config-service
-#    build: gateway-service
-#    image: gateway-service
-#    restart: always
-#    ports:
-#      - 80:4000
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+  gateway-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    depends_on:
+          - config-service
+    build: gateway-service
+    image: gateway-service
+    restart: always
+    ports:
+      - 80:4000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   auth-service:
     networks:
@@ -128,7 +132,7 @@ services:
 
   account-mongodb:
     environment:
-      INIT_DUMP: account-service-dump.js
+      INIT_DUMP: $INIT_DUMP_ACCOUNTS
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       MONGODB_USER: $MONGODB_USER
       MONGODB_NAME: $MONGODB_NAME

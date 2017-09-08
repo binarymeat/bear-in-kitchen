@@ -13,49 +13,8 @@ db.accounts.update(
                 "icon": "home",
                 "period": "MONTH",
                 "title": "Rent"
-            },
-            {
-                "amount": 120,
-                "currency": "USD",
-                "icon": "utilities",
-                "period": "MONTH",
-                "title": "Utilities"
-            },
-            {
-                "amount": 20,
-                "currency": "USD",
-                "icon": "meal",
-                "period": "DAY",
-                "title": "Meal"
-            },
-            {
-                "amount": 240,
-                "currency": "USD",
-                "icon": "gas",
-                "period": "MONTH",
-                "title": "Gas"
-            },
-            {
-                "amount": 3500,
-                "currency": "EUR",
-                "icon": "island",
-                "period": "YEAR",
-                "title": "Vacation"
-            },
-            {
-                "amount": 30,
-                "currency": "EUR",
-                "icon": "phone",
-                "period": "MONTH",
-                "title": "Phone"
-            },
-            {
-                "amount": 700,
-                "currency": "USD",
-                "icon": "sport",
-                "period": "YEAR",
-                "title": "Gym"
             }
+
         ],
         "incomes": [
             {

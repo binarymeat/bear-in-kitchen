@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Created by rob on 12/5/16.
@@ -39,5 +40,10 @@ public class AccountController {
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public Account createNewAccount(@Valid @RequestBody User user) {
         return accountService.create(user);
+    }
+
+    @RequestMapping(path = "/", method = RequestMethod.GET)
+    public List<Account> listAllAccounts() {
+        return accountService.findAll();
     }
 }

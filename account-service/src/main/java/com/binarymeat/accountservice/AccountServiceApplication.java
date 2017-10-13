@@ -34,8 +34,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableConfigurationProperties
 @Configuration
 public class AccountServiceApplication extends ResourceServerConfigurerAdapter {
-    @Autowired
-    private ResourceServerProperties sso;
 
     public static void main(String[] args) {
         SpringApplication.run(AccountServiceApplication.class, args);
@@ -56,11 +54,6 @@ public class AccountServiceApplication extends ResourceServerConfigurerAdapter {
     public OAuth2RestTemplate clientCredentialsRestTemplate() {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
-
-//    @Bean
-//    public ResourceServerTokenServices tokenServices() {
-//        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-//    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

@@ -8,12 +8,6 @@ security:
       accessTokenUri: http://auth-service:5000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
-    resource:
-      jwt:
-        keyValue: |
-          -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkNOPpOBpzGAKQhjLcOdRcFrK1/b3Xpm0EKvJNDDS5hPdYtNTMv9Nhl8h90ZxVbYG2B8j0JcXlrZexhsSbuxAFo5atnK5JE01A1YIj7aSHQ88S1+lrPOyqSvfqiwp2BCFbmmIV2utPyMKe1DMqCO5g17gD5XGOIDINWTcP958fjv9mIzvb6nyR/sHM4bV68OXZfHL0/FClSR6s8wFNg2OwBYJ3melxc8aD2XvOkCFdJRi6fb6CHQwTPJVEeb+hiI/Zeot2+++RAEesOP5XF+HCdr9UW+K7qFoKVRCyoPLmX4/ndr6Zb8zxG0roM8obDCs6iegqGpma8jR2vHq85PBIwIDAQAB
-          -----END PUBLIC KEY-----
 
 
 spring:

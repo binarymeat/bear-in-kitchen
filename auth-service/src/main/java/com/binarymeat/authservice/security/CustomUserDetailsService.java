@@ -13,18 +13,18 @@ import org.springframework.stereotype.Service;
 /**
  * Created by rob on 12/5/16.
  */
-@Service
+@Service("CustomUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         log.info("param username="+username);
-        User user = repository.findOne(username);
+        User user = userRepository.findOne(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(username);

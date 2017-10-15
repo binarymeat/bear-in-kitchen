@@ -6,7 +6,7 @@ db.accounts.update(
         "lastSeen": new Date()
     },
     {
-        "_id": "dog",
+        "_id": "bob",
         "lastSeen": new Date()
     },
     { upsert: true }

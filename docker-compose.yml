@@ -97,6 +97,7 @@ services:
 
   auth-mongodb:
     environment:
+      INIT_DUMP: $INIT_DUMP_AUTH_USERS
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       MONGODB_USER: $MONGODB_USER
       MONGODB_NAME: $MONGODB_NAME

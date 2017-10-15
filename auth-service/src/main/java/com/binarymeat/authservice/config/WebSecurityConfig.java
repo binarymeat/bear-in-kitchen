@@ -38,9 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .csrf().disable();
+                .authorizeRequests().anyRequest().authenticated();
         // @formatter:on
     }
 

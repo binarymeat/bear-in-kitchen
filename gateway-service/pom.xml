@@ -62,6 +62,26 @@
             <artifactId>webjars-locator</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>querystring</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>commonjs-require</artifactId>
+            <version>1.4.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>requirejs</artifactId>
+            <version>2.3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>client-oauth2</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>

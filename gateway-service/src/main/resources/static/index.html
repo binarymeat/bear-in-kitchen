@@ -25,6 +25,9 @@
     <div>
         With local Account: <a href="/uaa/login">click here</a>
     </div>
+    <div>
+        <button ng-click="home.sigh1()" class="btn btn-primary">sigh1</button>
+    </div>
 </div>
 <div class="container" ng-show="home.authenticated">
     Logged in as: <span ng-bind="home.user"></span>
@@ -32,8 +35,21 @@
         <button ng-click="home.logout()" class="btn btn-primary">Logout</button>
     </div>
 </div>
-<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
+<script type="text/javascript" src="/webjars/angularjs/1.4.3/angular.min.js"></script>
+<script type="text/javascript" src="/webjars/commonjs-require/1.4.6/commonjs-require.js"></script>
+<script type="text/javascript" src="/webjars/querystring/0.2.0/index.js"></script>
+<!--<script type="text/javascript" src="/webjars/requirejs/2.3.5/require.js"></script>-->
+<script type="text/javascript" src="/webjars/client-oauth2/4.1.0/src/client-oauth2.js"></script>
 <script type="text/javascript">
+    var ClientOAuth2 = require('client-oauth2');
+
+    var bearAuth = new ClientOAuth2({
+        clientId: 'browser',
+        accessTokenUri: '/uaa/oauth/access_token',
+        authorizationUri: '/uaa/oauth/authorize',
+        scopes: 'ui'
+    });
+
     angular
         .module("app", [])
         .config(
@@ -62,6 +78,15 @@
                 self.authenticated = false;
             });
         };
+
+        self.sigh1 = function() {
+            bearAuth.owner.getToken('bob', '123456')
+                .then(function (user) {
+                    console.log(user) //=> { accessToken: '...', tokenType: 'bearer', ... }
+                })
+        };
+
+
     });
 </script>
 </body>
